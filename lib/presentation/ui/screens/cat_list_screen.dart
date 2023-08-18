@@ -1,5 +1,6 @@
 import 'package:catbreeds_app/presentation/providers/cats_view_model.dart';
 import 'package:catbreeds_app/presentation/ui/widgets/cat_item.dart';
+import 'package:catbreeds_app/presentation/ui/widgets/icon_text_info.dart';
 import 'package:catbreeds_app/presentation/ui/widgets/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,13 +40,20 @@ class _CatListScreenState extends ConsumerState<CatListScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: SearchInput(
               onChanged: ref.read(catsViewModelProvider.notifier).filter,
             ),
           ),
           asyncCats.when(
             data: (cats) {
+              if (cats.isEmpty) {
+                return const IconTextInfo(
+                  label: 'No results found',
+                  icon: Icons.search_off_outlined,
+                );
+              }
+
               return Expanded(
                 child: ListView.builder(
                   itemCount: cats.length,
@@ -55,7 +63,10 @@ class _CatListScreenState extends ConsumerState<CatListScreen> {
                 ),
               );
             },
-            error: (error, s) => Text(error.toString()),
+            error: (error, s) => const IconTextInfo(
+              label: 'Ups... Error occurred',
+              icon: Icons.cloud_off_rounded,
+            ),
             loading: () => Image.asset(
               'assets/gif/loading2.gif',
               width: double.infinity,
