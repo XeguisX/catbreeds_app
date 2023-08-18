@@ -3,12 +3,12 @@ import 'package:catbreeds_app/data/models/cat.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final catsViewModelProvider =
-    StateNotifierProvider<CatsViewModel, AsyncValue<List<Cat>>>(
-  (ref) => CatsViewModel(ref.read(catDataSourceProvider)),
+    StateNotifierProvider<CatsController, AsyncValue<List<Cat>>>(
+  (ref) => CatsController(ref.read(catDataSourceProvider)),
 );
 
-class CatsViewModel extends StateNotifier<AsyncValue<List<Cat>>> {
-  CatsViewModel(this._catDataSource)
+class CatsController extends StateNotifier<AsyncValue<List<Cat>>> {
+  CatsController(this._catDataSource)
       : super(const AsyncValue<List<Cat>>.loading());
 
   final CatDataSource _catDataSource;

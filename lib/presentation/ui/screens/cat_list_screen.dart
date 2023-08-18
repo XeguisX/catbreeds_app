@@ -1,4 +1,4 @@
-import 'package:catbreeds_app/presentation/providers/cats_view_model.dart';
+import 'package:catbreeds_app/presentation/providers/cats_controller.dart';
 import 'package:catbreeds_app/presentation/ui/widgets/cat_item.dart';
 import 'package:catbreeds_app/presentation/ui/widgets/icon_text_info.dart';
 import 'package:catbreeds_app/presentation/ui/widgets/search_input.dart';
